@@ -15,6 +15,7 @@ class GlobalUtils {
   static String nullstore='';
   static String merchantName='';
   static String countrycode = '';
+  static String keysaved='0';
 
 
 }
