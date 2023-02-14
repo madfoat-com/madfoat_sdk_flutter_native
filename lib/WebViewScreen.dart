@@ -7,10 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xml/xml.dart';
-
+import 'helper/global_utils.dart';
+import 'helper/network_helper.dart';
+// import 'Glob';
 // import 'package:esys_flutter_share_plus/esys_flutter_share_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'main.dart';
 
 class WebviewScreen extends StatefulWidget {
 
@@ -127,7 +131,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
         return Container(
           color: Colors.red,
           width: 300,//MediaQuery.of(context).size.width
-          height: 300,//MediaQuery.of(context).size.height
+          height: 500,//MediaQuery.of(context).size.height
           child: WebView(
             initialUrl: '',
             javascriptMode: JavascriptMode.unrestricted,
@@ -247,12 +251,13 @@ class _WebviewScreenState extends State<WebviewScreen>{
             builder.text('24');
           });
         });
+        builder.element('savecard', nest: (){
+          builder.text(GlobalUtils.keysaved);
+        });
         builder.element('cvv', nest: (){
           builder.text('991');
         });
-
       });
-
       builder.element('browser', nest: (){
         builder.element('agent', nest: (){
           builder.text('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36');
@@ -289,9 +294,6 @@ class _WebviewScreenState extends State<WebviewScreen>{
       builder.element('key', nest: (){
         builder.text('BG88b#FBFpX^xSzw');
       });
-
-
-
       //tran
       builder.element('tran', nest: (){
 
