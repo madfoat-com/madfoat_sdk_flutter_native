@@ -101,6 +101,7 @@ class MySampleState extends State<MySample> {
   Widget build(BuildContext context) {
     void _onValidate() {
       // _
+
       Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreen()));//(context, LoginScreen.id);
 
       // if (formKey.currentState!.validate()) {
@@ -192,13 +193,13 @@ class MySampleState extends State<MySample> {
                                         width:100,
                                         // margin: EdgeInsets.all(2.0),
                                         // padding: EdgeInsets.all(2.0),
-                                        // decoration:BoxDecoration(
-                                        //     borderRadius:BorderRadius.circular(0),
-                                        //     color:Colors.white
-                                        // ),
+
                                         child: TextField(
                                           focusNode: _focusNodes[index],
                                           controller: _textEditController[index],
+                                          decoration:InputDecoration(
+                                            hintText: 'CVV',
+                                          ),
                                         ),
                                       )
                                     ]
@@ -391,6 +392,18 @@ class MySampleState extends State<MySample> {
                               ),
                               GestureDetector(
                                 onTap: (){
+                                  print(cardHolderName);
+                                  print(cardNumber);
+                                  print(cvvCode);
+                                  print(expiryDate);
+                                  GlobalUtils.cardname=cardHolderName;
+                                  GlobalUtils.cardnumber=cardNumber;
+                                  String str = expiryDate;
+                                  List<String> strarray = str.split('/');
+                                  GlobalUtils.cardexpirymonth=strarray[0];
+                                  GlobalUtils.cardexpiryyr=strarray[1];
+                                  GlobalUtils.cardcvv=cvvCode;
+
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) =>  WebviewScreen()),

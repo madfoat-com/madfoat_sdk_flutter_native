@@ -16,6 +16,11 @@ class GlobalUtils {
   static String merchantName='';
   static String countrycode = '';
   static String keysaved='0';
+  static String cardnumber='0';
+  static String cardexpirymonth='0';
+  static String cardexpiryyr='0';
+  static String cardcvv='0';
+  static String cardname='';
 
 
 }

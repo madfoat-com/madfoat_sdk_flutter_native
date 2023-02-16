@@ -241,21 +241,21 @@ class _WebviewScreenState extends State<WebviewScreen>{
       // address
       builder.element('card', nest: (){
         builder.element('number', nest: (){
-          builder.text('5576526607480560');
+          builder.text(GlobalUtils.cardnumber);
         });
         builder.element('expiry', nest: (){
           builder.element('month', nest: (){
-            builder.text('04');
+            builder.text(GlobalUtils.cardexpirymonth);
           });
           builder.element('year', nest: (){
-            builder.text('24');
+            builder.text(GlobalUtils.cardexpiryyr);
           });
         });
         builder.element('savecard', nest: (){
           builder.text(GlobalUtils.keysaved);
         });
         builder.element('cvv', nest: (){
-          builder.text('991');
+          builder.text(GlobalUtils.cardcvv);
         });
       });
       builder.element('browser', nest: (){
@@ -324,22 +324,25 @@ class _WebviewScreenState extends State<WebviewScreen>{
       });
 
       // card
+      // address
       builder.element('card', nest: (){
         builder.element('number', nest: (){
-          builder.text('5576526607480560');
+          builder.text(GlobalUtils.cardnumber);
         });
         builder.element('expiry', nest: (){
           builder.element('month', nest: (){
-            builder.text('04');
+            builder.text(GlobalUtils.cardexpirymonth);
           });
           builder.element('year', nest: (){
-            builder.text('24');
+            builder.text(GlobalUtils.cardexpiryyr);
           });
         });
-        builder.element('cvv', nest: (){
-          builder.text('991');
+        builder.element('savecard', nest: (){
+          builder.text(GlobalUtils.keysaved);
         });
-
+        builder.element('cvv', nest: (){
+          builder.text(GlobalUtils.cardcvv);
+        });
       });
       //billing
       builder.element('billing', nest: (){
