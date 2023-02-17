@@ -130,8 +130,8 @@ class _WebviewScreenState extends State<WebviewScreen>{
       body: _loadWebView? Builder(builder: (BuildContext context) {
         return Container(
           color: Colors.red,
-          width: 300,//MediaQuery.of(context).size.width
-          height: 500,//MediaQuery.of(context).size.height
+          width: 500,//MediaQuery.of(context).size.width
+          height: 800,//MediaQuery.of(context).size.height
           child: WebView(
             initialUrl: '',
             javascriptMode: JavascriptMode.unrestricted,

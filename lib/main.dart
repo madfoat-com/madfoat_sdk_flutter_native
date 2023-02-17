@@ -36,6 +36,7 @@ class MySampleState extends State<MySample> {
   List<bool> _checkBoxValue = <bool>[];
   List<FocusNode> _focusNodes = <FocusNode>[];
   bool _saveCard = false;
+  String svdCvv='';
   @override
   void initState() {
     getPref();
@@ -79,6 +80,7 @@ class MySampleState extends State<MySample> {
         List<dynamic> list = <dynamic>[];
         // flutter: {SavedCardListResponse: {Code: 200, Status: Success, data: [{Transaction_ID: 040029158825, Name: Visa Credit ending with 0002, Expiry: 4/25}, {Transaction_ID: 040029158777, Name: MasterCard Credit ending with 0560, Expiry: 4/24}]}}
         list = response['SavedCardListResponse']['data'];
+
         setState(() {
           _list = list;
           print('Divya test $_list, length = ${_list.length}'); // list get printed
@@ -102,14 +104,14 @@ class MySampleState extends State<MySample> {
     void _onValidate() {
       // _
 
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreen()));//(context, LoginScreen.id);
+   //   Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreen()));//(context, LoginScreen.id);
 
-      // if (formKey.currentState!.validate()) {
-      //   print('valid!');
-      //   launchURL();
-      // } else {
-      //   print('invalid!');
-      // }
+      if (formKey.currentState!.validate()) {
+        print('valid!');
+        launchURL();
+      } else {
+        print('invalid!');
+      }
     }
 
     return MaterialApp(
@@ -124,7 +126,6 @@ class MySampleState extends State<MySample> {
               resizeToAvoidBottomInset: false,
               body: Container(
                 decoration: const BoxDecoration(
-
                   color: Colors.white,
                 ),
                 child: SafeArea(
@@ -140,17 +141,10 @@ class MySampleState extends State<MySample> {
                             itemCount: _list.length, //ith
                             itemBuilder: (context, int index) {
                               return Container(
-
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children:<Widget> [
                                       Container(
-                                        // margin: EdgeInsets.all(2.0),
-                                        // padding: EdgeInsets.all(2.0),
-                                        // decoration:BoxDecoration(
-                                        //     borderRadius:BorderRadius.circular(0),
-                                        //     color:Colors.white
-                                        // ),
                                         child:  Checkbox(value: _checkBoxValue[index],
                                             onChanged: (value) {
                                               if (value!) {
@@ -172,12 +166,6 @@ class MySampleState extends State<MySample> {
                                         ),
                                       ),
                                       Container(
-                                        // margin: EdgeInsets.all(2.0),
-                                        // padding: EdgeInsets.all(2.0),
-                                        // decoration:BoxDecoration(
-                                        //     borderRadius:BorderRadius.circular(0),
-                                        //     color:Colors.white
-                                        // ),
                                         child: Text('${_list[index]['Name']}',
                                             style: TextStyle(color: Colors.black,fontSize:12)),
                                       ),
@@ -185,15 +173,11 @@ class MySampleState extends State<MySample> {
                                         width: 40,
                                         margin: EdgeInsets.all(2.0),
                                         padding: EdgeInsets.all(2.0),
-
                                         child: Text(' ' + '${_list[index]['Expiry']}',
                                             style: TextStyle(color: Colors.black,fontSize:12)),
                                       ),
                                       Container(
                                         width:100,
-                                        // margin: EdgeInsets.all(2.0),
-                                        // padding: EdgeInsets.all(2.0),
-
                                         child: TextField(
                                           focusNode: _focusNodes[index],
                                           controller: _textEditController[index],
@@ -255,57 +239,6 @@ class MySampleState extends State<MySample> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: <Widget>[
-                              // _list.length == 0? Container(): Container(
-                              //   height: 200,
-                              //   child: ListView.builder(
-                              //       physics: NeverScrollableScrollPhysics(),
-                              //       itemCount: _list.length,
-                              //       itemBuilder: (context, int index){
-                              //         return Container(
-                              //             child:  Row(
-                              //               children: [
-                              //                 Checkbox(value: _checkBoxValue[index], onChanged: ( value){
-                              //                   if(value!){
-                              //                     _focusNodes[index].requestFocus();
-                              //                   }
-                              //                   else{
-                              //                     _focusNodes[index].unfocus();
-                              //                   }
-                              //                   setState(() {
-                              //                     _checkBoxValue[index] = value!;
-                              //
-                              //                     for(int i = 0 ; i< _list.length; i++)
-                              //                     {
-                              //                       if(i != index){
-                              //                         _checkBoxValue[i] = false;
-                              //                       }
-                              //                     }
-                              //                   });
-                              //                 }
-                              //                 ),
-                              //                 // Image.asset(""),
-                              //                 Column(
-                              //                   children: [
-                              //                     Text('${_list[index]['Name']}'),
-                              //                     Text('${_list[index]['Expiry']}')
-                              //                   ],
-                              //                 ),
-                              //                 Container(
-                              //                   width: 100,
-                              //                   child: TextField(
-                              //                     focusNode: _focusNodes[index],
-                              //                     controller: _textEditController[index],
-                              //                   ),
-                              //                 )
-                              //
-                              //               ],
-                              //             )
-                              //         );
-                              //       }),
-                              // ),
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
                               CreditCardForm(
                                 formKey: formKey,
                                 obscureCvv: true,
@@ -456,7 +389,7 @@ class MySampleState extends State<MySample> {
 
   void launchURL() {
     print(cardNumber);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreen()));//(context, LoginScreen.id);
+    //Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreen()));//(context, LoginScreen.id);
   }
 
 // void _launchURL(String url, String code) async {
