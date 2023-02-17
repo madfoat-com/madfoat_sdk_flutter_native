@@ -110,7 +110,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
 
     ''');
   }
-  String _homeText = 'Webview not loaded';
+  String _homeText = '';
 
   @override
   void initState() {
