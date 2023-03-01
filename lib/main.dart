@@ -7,6 +7,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'addnewcard.dart';
 import 'helper/global_utils.dart';
 import 'helper/network_helper.dart';
 void main() => runApp(MySample());
@@ -192,6 +193,21 @@ class MySampleState extends State<MySample> {
                               );
                             }),
                       ),
+                      CupertinoButton(
+                          child: Container(
+                            height: 40,
+                            color: Color(0xff00A887),
+                            child: Center(
+                                child: Text(
+                                  'Add New Card',
+                                  style: TextStyle(color: Colors.white, fontSize: 14),
+                                )),
+                          ),
+                          onPressed: () {
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=> AddNewCard()));//(context, LoginScreen.id);
+
+
+                          }),
                       SizedBox(
                         height: 10,
                       ),
@@ -205,7 +221,7 @@ class MySampleState extends State<MySample> {
                         expiryDate: expiryDate,
                         cardHolderName: cardHolderName,
                         cvvCode: cvvCode,
-                        bankName: 'Bank Name',
+                        bankName: '',
                         frontCardBorder:
                         !useGlassMorphism
                             ? Border.all(color: Color(0xff00A887))
@@ -349,7 +365,7 @@ class MySampleState extends State<MySample> {
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: const Text(
-                                    'Validate',
+                                    'PROCEED TO PYMENT',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'halter',

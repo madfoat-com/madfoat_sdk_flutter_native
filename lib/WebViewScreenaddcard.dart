@@ -16,14 +16,14 @@ import 'package:flutter/material.dart';
 
 import 'main.dart';
 
-class WebviewScreen extends StatefulWidget {
+class WebviewScreenaddcard extends StatefulWidget {
 
   static const String id = 'webview_screen';
   // late final String title;
   @override
-  _WebviewScreenState createState() => _WebviewScreenState();
+  _WebviewScreenaddcardState createState() => _WebviewScreenaddcardState();
 }
-class _WebviewScreenState extends State<WebviewScreen>{
+class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
 
   var random = new Random();
   String _session = '';
@@ -123,10 +123,9 @@ class _WebviewScreenState extends State<WebviewScreen>{
   Widget build(BuildContext context) {
 
     return Scaffold(
-      // appBar: AppBar(
-      //
-      //   title: Text('Title'),
-      // ),
+      appBar: AppBar(
+        title: Text('New Card'),
+      ),
       body: _loadWebView? Builder(builder: (BuildContext context) {
         return Container(
           color: Colors.white,
@@ -207,7 +206,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
       builder.element('tran', nest: (){
 
         builder.element('type', nest: (){
-          builder.text('sale');
+          builder.text('verify');
         });
         builder.element('class', nest: (){
           builder.text('ecom');
@@ -298,7 +297,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
       builder.element('tran', nest: (){
 
         builder.element('type', nest: (){
-          builder.text('sale');
+          builder.text('verify');
         });
         builder.element('class', nest: (){
           builder.text('ecom');
