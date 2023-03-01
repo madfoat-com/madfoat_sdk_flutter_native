@@ -96,10 +96,15 @@ class AddNewCardState extends State<AddNewCard> {
                 leading: GestureDetector(
                   child: Icon( Icons.arrow_back_ios, color: Colors.white,),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.of(context).pop();
                   } ,
                 ) ,
               ),
+              // appBar: AppBar(
+              //   title: Text('Add New Card'),
+              //   backgroundColor: Color(0xff00A887),
+              // ),
+
               resizeToAvoidBottomInset: false,
               body: Container(
                 decoration: const BoxDecoration(

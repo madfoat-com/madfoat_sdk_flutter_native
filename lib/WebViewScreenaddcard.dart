@@ -9,16 +9,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xml/xml.dart';
 import 'helper/global_utils.dart';
 import 'helper/network_helper.dart';
-// import 'Glob';
-// import 'package:esys_flutter_share_plus/esys_flutter_share_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import 'main.dart';
 
 class WebviewScreenaddcard extends StatefulWidget {
 
-  static const String id = 'webview_screen';
+  static const String id = 'webviewaddcard_screen';
   // late final String title;
   @override
   _WebviewScreenaddcardState createState() => _WebviewScreenaddcardState();
@@ -33,9 +27,8 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
   final Completer<WebViewController> _controller = Completer<WebViewController>();
   late WebViewController _con ;
   void _callApi()async{
-    var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote_mpi.xml');
-
-
+     var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote_mpi.xml'); //uat
+    // var uri = Uri.parse('https://secure.telr.com/gateway/remote_mpi.xml');
     // create xml here..
     String xmlString =  CreateXML();
 
@@ -61,7 +54,7 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
       print(' redirect url = before = ${url.toString()} ');
       print(' redirect url = after =  ${redirectionurl.toString()}');
       print(' session url = $_session2');
-      // _callresponseApi(); //
+    //_callresponseApi(); //
       setState(() {
         _loadWebView = true;
       });
@@ -70,8 +63,8 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
 
   void _callresponseApi()async{
     String responsexmlString=CreateResponseXML();
-
-    var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote.xml');
+ var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote.xml'); //uat
+//     var uri = Uri.parse(' https://secure.telr.com/gateway/remote.xml');
     var response = await http.post(uri,body: responsexmlString);
     print('Response 2 =  ${response.statusCode} & ${response.body}');
   }
@@ -125,6 +118,7 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
     return Scaffold(
       appBar: AppBar(
         title: Text('New Card'),
+        backgroundColor: Color(0xff00A887),
       ),
       body: _loadWebView? Builder(builder: (BuildContext context) {
         return Container(
@@ -144,13 +138,14 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
             },
             navigationDelegate: (NavigationRequest request) {
               print('Inside navigationDelegate ${request.url}');
-              if (request.url.startsWith('telr.com')) {
+              if (request.url.contains('telr.com')) {
                 print('blocking navigation to $request}');
                 setState(() {
                   _loadWebView = false;
                   _homeText = 'Loading second api';
+
                 });
-                _callresponseApi();
+               _callresponseApi();
                 return NavigationDecision.prevent;
               }
               print('allowing navigation to $request');
@@ -267,7 +262,7 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
       });
       builder.element('mpi', nest: (){
         builder.element('returnurl', nest: (){
-          builder.text('');
+          builder.text('https://www.telr.com');
         });
         builder.element('accept', nest: (){
           builder.text('*/*');
@@ -316,7 +311,7 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
           builder.text('1');
         });
         builder.element('test', nest: (){
-          builder.text('1');
+          builder.text('0');
         });
 
 

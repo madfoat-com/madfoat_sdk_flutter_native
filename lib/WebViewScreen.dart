@@ -33,7 +33,8 @@ class _WebviewScreenState extends State<WebviewScreen>{
   final Completer<WebViewController> _controller = Completer<WebViewController>();
   late WebViewController _con ;
   void _callApi()async{
-    var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote_mpi.xml');
+  //  var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote_mpi.xml'); //uat
+    var uri = Uri.parse('https://secure.telr.com/gateway/remote_mpi.xml');
 
 
     // create xml here..
@@ -71,7 +72,8 @@ class _WebviewScreenState extends State<WebviewScreen>{
   void _callresponseApi()async{
     String responsexmlString=CreateResponseXML();
 
-    var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote.xml');
+  //  var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote.xml'); //uat
+    var uri = Uri.parse(' https://secure.telr.com/gateway/remote.xml');
     var response = await http.post(uri,body: responsexmlString);
     print('Response 2 =  ${response.statusCode} & ${response.body}');
   }
@@ -151,11 +153,12 @@ class _WebviewScreenState extends State<WebviewScreen>{
                   _loadWebView = false;
                   _homeText = 'Loading second api';
                 });
-                _callresponseApi();
+
                 return NavigationDecision.prevent;
               }
               print('allowing navigation to $request');
               return NavigationDecision.navigate;
+              _callresponseApi();
             },
             onPageStarted: (String url) {
               print('Page started loading: $url');
@@ -165,6 +168,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
               if (url.contains('telr.com'))
               {
                 print('Inside onPageFinished telr.com');
+
               }
             },
             gestureNavigationEnabled: true,
@@ -317,7 +321,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
           builder.text('1');
         });
         builder.element('test', nest: (){
-          builder.text('1');
+          builder.text('0');
         });
 
 
