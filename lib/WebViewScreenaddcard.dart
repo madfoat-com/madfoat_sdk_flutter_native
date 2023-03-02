@@ -67,6 +67,10 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
 //     var uri = Uri.parse(' https://secure.telr.com/gateway/remote.xml');
     var response = await http.post(uri,body: responsexmlString);
     print('Response 2 =  ${response.statusCode} & ${response.body}');
+    SnackBar snackBar = SnackBar(
+        content: Text('${response.statusCode} & ${response.body}')
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void _loadHTML() async {
