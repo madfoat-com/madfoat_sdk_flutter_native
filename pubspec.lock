@@ -69,6 +69,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.5"
+  flutter_dialogs:
+    dependency: "direct dev"
+    description:
+      name: flutter_dialogs
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -190,7 +197,7 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.17"
+    version: "2.0.18"
   shared_preferences_android:
     dependency: transitive
     description:

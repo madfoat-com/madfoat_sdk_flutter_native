@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-
+import 'package:example/WebViewScreenSavedcards.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'addnewcard.dart';
 import 'helper/global_utils.dart';
 import 'helper/network_helper.dart';
@@ -177,22 +176,37 @@ class MySampleState extends State<MySample> {
                                         child: Text(' ' + '${_list[index]['Expiry']}',
                                             style: TextStyle(color: Colors.black,fontSize:12)),
                                       ),
-                                      Container(
-                                        width:100,
-                                        child: TextField(
-                                          focusNode: _focusNodes[index],
-                                          controller: _textEditController[index],
-                                          decoration:InputDecoration(
-                                            hintText: 'CVV',
-                                          ),
-                                        ),
-                                      )
+                                      // Container(
+                                      //   width:100,
+                                      //   child: TextField(
+                                      //     focusNode: _focusNodes[index],
+                                      //     controller: _textEditController[index],
+                                      //     decoration:InputDecoration(
+                                      //       hintText: 'CVV',
+                                      //     ),
+                                      //   ),
+                                      // )
                                     ]
                                 ),
 
                               );
                             }),
                       ),
+                      CupertinoButton(
+                          child: Container(
+                            height: 40,
+                            color: Color(0xff00A887),
+                            child: Center(
+                                child: Text(
+                                  'Proceed with saved card',
+                                  style: TextStyle(color: Colors.white, fontSize: 14),
+                                )),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreenSavedcards()));//(context, LoginScreen.id);
+
+
+                          }),
                       CupertinoButton(
                           child: Container(
                             height: 40,
@@ -365,7 +379,7 @@ class MySampleState extends State<MySample> {
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: const Text(
-                                    'PROCEED TO PYMENT',
+                                    'PROCEED TO PAYMENT',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'halter',

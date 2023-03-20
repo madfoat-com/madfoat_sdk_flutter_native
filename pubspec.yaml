@@ -24,16 +24,17 @@ dependencies:
   flutter_credit_card: ^3.0.5
   intl: ^0.17.0
   http: ^0.13.0
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
+  #flutter_webview_plugin: ^0.4.0
 #  sdk:
-#   path: /Users/telrdev/Downloads/25557_Flutter23022022/Flutter/sdk_remote
+#   path: /Users/telrdev/Downloads/25557_Flutter23022022/Flutter/sdk
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   webview_flutter: ^3.0.4
   xml: ^5.3.1
-
+  flutter_dialogs: ^3.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
