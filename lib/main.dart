@@ -360,7 +360,7 @@ class MySampleState extends State<MySample> {
                                   print(cvvCode);
                                   print(expiryDate);
                                   GlobalUtils.cardname=cardHolderName;
-                                  GlobalUtils.cardnumber=cardNumber;
+                                  GlobalUtils.cardnumber = (cardNumber.replaceAll(' ', ''));;
                                   String str = expiryDate;
                                   List<String> strarray = str.split('/');
                                   GlobalUtils.cardexpirymonth=strarray[0];

@@ -9,8 +9,8 @@ class GlobalUtils {
    bool test = false;
    static String username='';
    static String currency='';
-  static String storeid='';
-  static String authkey='';
+  static String storeid='15996';
+  static String authkey='pQ6nP-7rHt@5WRFv';
   static String nullauth='';
   static String nullstore='';
   static String merchantName='';
@@ -47,6 +47,6 @@ class GlobalUtils {
   static String phone='551188269'; //the minimum required details for a transaction to be processed.
   static String emailId='divya.thampi@telr.com';//the minimum required details for a transaction to be processed.
   static String paymenttype='card'; // Let it be static as 'card', used for saved card feature parameter
-
+  static String code='';
 
 }

@@ -106,4 +106,29 @@ class NetWorkHelper {
       return 'failed';
     }
   }
+  Future getTransactionstatus(XmlDocument xml) async {
+    String url = 'https://secure.telr.com/gateway/mobile_complete.xml';
+    var data = {xml};
+
+    var body = xml.toString();
+
+
+    http.Response response = await http.post(
+      Uri.parse(url),
+      body: body,
+      headers: {
+        "Content-Type": "application/xml",
+      },
+    );
+    print("Response = ${response.statusCode}");
+    // print("Response body = ${response.body}");
+    if (response.statusCode == 200 || response.statusCode == 400) {
+
+      return response.body;
+    }
+    else
+    {
+      return 'failed';
+    }
+  }
 }

@@ -46,32 +46,8 @@ class _WebviewScreenSavedcardsState extends State<WebviewScreenSavedcards>{
       Iterable<String> statusmessage=doc.findAllElements('message').map((node) => node.text);
       print(statusmessage);
       alertShow(statusmessage.toString());
-      // Fluttertoast.showToast(
-      //     msg: statusmessage.toString(),
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.CENTER,
-      //     timeInSecForIosWeb: 1,
-      //     backgroundColor: Colors.red,
-      //     textColor: Colors.white,
-      //     fontSize: 16.0
-      // );
-      final redirecthtml = doc.findAllElements('redirecthtml').map((node) => node.text);
-      final session = doc.findAllElements('session').map((node) => node.text);
 
-      String url=redirecthtml.toString();
-      String url1 = url.replaceRange(0,1, "");
-      int leng = url1.length;
-      print('Length = $leng');
-
-      redirectionurl = url1.replaceRange(leng - 1,leng, "");
-      _session = session.toString();
-      String _session1 = _session.replaceRange(0,1, "");
-      int sLen = _session1.length;
-      _session2=_session1.replaceRange(sLen - 1, sLen,"");
-      print(' redirect url = before = ${url.toString()} ');
-      print(' redirect url = after =  ${redirectionurl.toString()}');
-      print(' session url = $_session2');
-      // _callresponseApi(); //
+       _callresponseApi(); //
       setState(() {
         _loadWebView = true;
       });
@@ -96,49 +72,18 @@ class _WebviewScreenSavedcardsState extends State<WebviewScreenSavedcards>{
       ),
     );
   }
-  // void _callresponseApi()async{
-  //  // String responsexmlString=CreateResponseXML();
-  //
-  // //  var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote.xml'); //uat
-  //   var uri = Uri.parse(' https://secure.telr.com/gateway/remote.xml');
-  //   var response = await http.post(uri,body: responsexmlString);
-  //   print('Response 2 =  ${response.statusCode} & ${response.body}');
-  // }
+  void _callresponseApi()async{
+ String responsexmlString=CreateResponseXML();
 
-  void _loadHTML() async {
-    _con.loadUrl(Uri.dataFromString(
-        setHTML(),
-        mimeType: 'text/html',
-        encoding: Encoding.getByName('utf-8')
-    ).toString());
+  //  var uri = Uri.parse('https://uat-secure.telrdev.com/gateway/remote.xml'); //uat
+    var uri = Uri.parse('https://secure.telr.com/gateway/mobile_complete.xml');
+    var response = await http.post(uri,body: responsexmlString);
+    print('Response 2 =  ${response.statusCode} & ${response.body}');
   }
 
-  String setHTML() {
-    return ('''
-<html>
-<head></head>
-<body>
-    <script type="text/javascript">
-
-    function show3DSChallenge() {
-        var redirect_html = '$redirectionurl';
-        var txt = document.createElement("textarea");
-        txt.innerHTML = redirect_html;
-        redirect_html_new = decodeURIComponent(txt.value);
-        document.body.innerHTML = redirect_html_new;
-        eval(document.getElementById('authenticate-payer-script').text)
-
-    }
-    show3DSChallenge();
-    </script>
-</body>
-</html>
 
 
-      
 
-    ''');
-  }
   String _homeText = '';
 
   @override
@@ -356,120 +301,30 @@ class _WebviewScreenSavedcardsState extends State<WebviewScreenSavedcards>{
   }
 
 
-  // String CreateResponseXML(){
-  //   final builder = XmlBuilder();
-  //   builder.processing('xml', 'version="1.0"');
-  //   builder.element('mobile', nest: () {
-  //     builder.element('store', nest: (){
-  //       builder.text('15996');
-  //     });
-  //     builder.element('key', nest: (){
-  //       builder.text('pQ6nP-7rHt@5WRFv');
-  //     });
-  //     //tran
-  //     builder.element('tran', nest: (){
-  //
-  //       builder.element('type', nest: (){
-  //         builder.text('sale');
-  //       });
-  //       builder.element('class', nest: (){
-  //         builder.text('ecom');
-  //       });
-  //       builder.element('cartid', nest: (){
-  //         builder.text('atZGs9C762');
-  //       });
-  //       builder.element('description', nest: (){
-  //         builder.text('Test for Mobile API MPI order');
-  //       });
-  //
-  //       builder.element('currency', nest: (){
-  //         builder.text('AED');
-  //       });
-  //       builder.element('amount', nest: (){
-  //         builder.text('1');
-  //       });
-  //       builder.element('test', nest: (){
-  //         builder.text('0');
-  //       });
-  //
-  //
-  //     });
-  //
-  //     // card
-  //     // address
-  //     builder.element('card', nest: (){
-  //       builder.element('number', nest: (){
-  //         builder.text(GlobalUtils.cardnumber);
-  //       });
-  //       builder.element('expiry', nest: (){
-  //         builder.element('month', nest: (){
-  //           builder.text(GlobalUtils.cardexpirymonth);
-  //         });
-  //         builder.element('year', nest: (){
-  //           builder.text(GlobalUtils.cardexpiryyr);
-  //         });
-  //       });
-  //       builder.element('savecard', nest: (){
-  //         builder.text(GlobalUtils.keysaved);
-  //       });
-  //       builder.element('cvv', nest: (){
-  //         builder.text(GlobalUtils.cardcvv);
-  //       });
-  //     });
-  //     //billing
-  //     builder.element('billing', nest: (){
-  //       // name
-  //       builder.element('name', nest: (){
-  //         builder.element('title', nest: (){
-  //           builder.text('');
-  //         });
-  //         builder.element('first', nest: (){
-  //           builder.text('Telr');
-  //         });
-  //         builder.element('last', nest: (){
-  //           builder.text('Dev');
-  //         });
-  //       });
-  //       // address
-  //       builder.element('address', nest: (){
-  //         builder.element('line1', nest: (){
-  //           builder.text('SIT Tower');
-  //         });
-  //         builder.element('city', nest: (){
-  //           builder.text('Dubai');
-  //         });
-  //         builder.element('region', nest: (){
-  //           builder.text('Dubai');
-  //         });
-  //         builder.element('country', nest: (){
-  //           builder.text('AE');
-  //         });
-  //       });
-  //
-  //       builder.element('email', nest: (){
-  //         builder.text('divya.thampi@telr.com');
-  //       });
-  //       builder.element('ip', nest: (){
-  //         builder.text('106.193.225.18');
-  //       });
-  //     });
-  //
-  //
-  //
-  //     builder.element('mpi', nest: (){
-  //
-  //       builder.element('session', nest: (){
-  //         builder.text(_session2);
-  //       });
-  //     });
-  //   });
-  //
-  //   final bookshelfXml = builder.buildDocument();
-  //
-  //   print(bookshelfXml);
-  //   return bookshelfXml.toString();
-  //   //  pay(bookshelfXml);
-  // }
+
+
+  String CreateResponseXML(){
+    final builder = XmlBuilder();
+    builder.processing('xml', 'version="1.0"');
+    builder.element('mobile', nest: () {
+      builder.element('store', nest: (){
+        builder.text('15996');
+      });
+      builder.element('key', nest: (){
+        builder.text('pQ6nP-7rHt@5WRFv');
+      });
+
+      builder.element('complete', nest: (){
+        builder.text('');
+      });
+    });
+
+    final bookshelfXml = builder.buildDocument();
+
+    print(bookshelfXml);
+    return bookshelfXml.toString();
+    //  pay(bookshelfXml);
+  }
 
 
 
