@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'addnewcard.dart';
 import 'helper/global_utils.dart';
 import 'helper/network_helper.dart';
+import 'package:pay/pay.dart';
+
 void main() => runApp(MySample());
 
 class MySample extends StatefulWidget {
@@ -17,6 +19,14 @@ class MySample extends StatefulWidget {
     return MySampleState();
   }
 }
+const _paymentItems = [
+  PaymentItem(
+    label: 'Total',
+    amount: '99.99',
+    status: PaymentItemStatus.final_price,
+  )
+];
+
 class MySampleState extends State<MySample> {
    static String keysaved='0';
   String cardNumber = '';
@@ -134,7 +144,7 @@ class MySampleState extends State<MySample> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       _list.length == 0 ? Container() : Container(
-                        height:_list.length * 50,
+                        height:_list.length * 45,
                         // width: 200,
                         child: ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
@@ -176,6 +186,18 @@ class MySampleState extends State<MySample> {
                                         child: Text(' ' + '${_list[index]['Expiry']}',
                                             style: TextStyle(color: Colors.black,fontSize:12)),
                                       ),
+
+                                      CupertinoButton(
+                                        minSize: double.minPositive,
+                                        padding: EdgeInsets.zero,
+                                        child: Icon(
+                                            Icons.delete,
+                                            color: Colors.black,
+                                            size: 20
+                                        ),
+                                        onPressed: () { getdelcardList();},
+                                      )
+
                                       // Container(
                                       //   width:100,
                                       //   child: TextField(
@@ -194,12 +216,13 @@ class MySampleState extends State<MySample> {
                       ),
                       CupertinoButton(
                           child: Container(
-                            height: 40,
+                            height: 30,
+                            margin: const EdgeInsets.only(top: 1.0,bottom: 2.0),
                             color: Color(0xff00A887),
                             child: Center(
                                 child: Text(
                                   'Proceed with saved card',
-                                  style: TextStyle(color: Colors.white, fontSize: 14),
+                                  style: TextStyle(color: Color(0xffffffff), fontSize: 14,fontWeight:FontWeight.normal ),
                                 )),
                           ),
                           onPressed: () {
@@ -209,12 +232,13 @@ class MySampleState extends State<MySample> {
                           }),
                       CupertinoButton(
                           child: Container(
-                            height: 40,
+                            height: 30,
+                            margin: const EdgeInsets.only(top: 1.0),
                             color: Color(0xff00A887),
                             child: Center(
                                 child: Text(
                                   'Add New Card',
-                                  style: TextStyle(color: Colors.white, fontSize: 14),
+                                  style: TextStyle(color: Colors.white, fontSize: 14,fontWeight:FontWeight.normal),
                                 )),
                           ),
                           onPressed: () {
@@ -222,11 +246,29 @@ class MySampleState extends State<MySample> {
 
 
                           }),
+                      ApplePayButton(
+                        paymentConfigurationAsset: 'applepay.json',
+                        paymentItems: _paymentItems,
+                        style: ApplePayButtonStyle.black,
+                        type: ApplePayButtonType.buy,
+                        width: 100,
+                        height: 30,
+                        margin: const EdgeInsets.only(top: 1.0,left: 15.0,right: 15.0),
+                        onPaymentResult: (value) {
+                          print(value);
+                        },
+                        onError: (error) {
+                          print(error);
+                        },
+                        loadingIndicator: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       const SizedBox(
-                        height: 7,
+                        height: 3,
                       ),
                       CreditCardWidget(
                         glassmorphismConfig:
@@ -299,7 +341,7 @@ class MySampleState extends State<MySample> {
                                       color: Color(0xff00A887)),
                                   focusedBorder: border,
                                   enabledBorder: border,
-                                  labelText: 'Expired Date',
+                                  labelText: 'Expired Date', // field to adjust the height cccccccccccc
                                   hintText: 'XX/XX',
                                 ),
                                 cvvCodeDecoration: InputDecoration(
@@ -337,10 +379,12 @@ class MySampleState extends State<MySample> {
                                           {
 
                                             GlobalUtils.keysaved='1';
+                                            print('1');
                                           }
                                           else
                                             {
                                               GlobalUtils.keysaved='0';
+                                              print('0');
                                             }
                                         });
                                       },
@@ -351,7 +395,7 @@ class MySampleState extends State<MySample> {
                               ),
 
                               const SizedBox(
-                                height: 20,
+                                height: 15,
                               ),
                               GestureDetector(
                                 onTap: (){
@@ -421,6 +465,29 @@ class MySampleState extends State<MySample> {
     print(cardNumber);
     //Navigator.push(context, MaterialPageRoute(builder: (context)=> WebviewScreen()));//(context, LoginScreen.id);
   }
+
+  void getdelcardList() async {
+    NetWorkHelper netWorkHelper = NetWorkHelper();
+    dynamic response = await netWorkHelper.getdeletecardlist(store, keyy,GlobalUtils.transref);
+    print(response);
+    if (response == null) {
+      // no data show error message.
+    } else {
+      if (response.toString().contains('Success')) {
+        _showLoader = false;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Card deleted successfully"),
+        ));
+      }
+      else {
+        print(response);
+
+
+
+      }
+    }
+  }
+
 
 // void _launchURL(String url, String code) async {
 //   Navigator.push(
