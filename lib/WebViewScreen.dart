@@ -142,7 +142,7 @@ class _WebviewScreenState extends State<WebviewScreen>{
         builder.text('15996');
       });
       builder.element('key', nest: (){
-        builder.text('pQ6nP-7rHt@5WRFv');
+        builder.text('pQ6nP-7rHt@5WRFv'); //N2RnZ-Ljdr@5n2ZB
       });
       builder.element('framed',nest:(){
         builder.text(GlobalUtils.framed);
@@ -207,7 +207,14 @@ class _WebviewScreenState extends State<WebviewScreen>{
         // });
 
       });
+//new changes to add savecard option
+      builder.element('card', nest: (){
+        builder.element('savecard', nest: (){
+          builder.text(GlobalUtils.savecard);
+        });
 
+      });
+ //---------------------------------
       //billing
       builder.element('billing', nest: (){
         // name

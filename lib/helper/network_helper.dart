@@ -15,7 +15,7 @@ class NetWorkHelper {
     var data = {
       'storeid': '15996',
       'authkey': 'pQ6nP-7rHt@5WRFv',
-      'custref': '123',
+      'custref': '444',
       'testmode': '1'
     };
     var requestData = {'SavedCardListRequest': data};
@@ -44,7 +44,43 @@ class NetWorkHelper {
     //   return response.statusCode;
 
   }
+  Future<dynamic> getdeletecardlist(String storeId, String authKey,String transref) async {
+    // String url = 'https://secure.telr.com/gateway/delsavedcards.json';
+    String url = 'https://secure.telr.com/gateway/delsavedcards.json';
+    var data = {
+    'storeid':'15996',
+    'authkey': 'pQ6nP-7rHt@5WRFv',
+    'custref': '444',
+    'testmode': '1',
+    'tranref':transref
 
+    };
+   // var requestData = { data};
+
+    print('Data auth test: $data');
+   // print('Data auth test: $requestData');
+
+    var body = json.encode(data);
+    print('body = $body');
+
+    http.Response response = await http.post(
+      Uri.parse(url),
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+   // print("Register email  = $response");
+
+    String dataReturned = response.body;
+    dynamic decodedData = jsonDecode(dataReturned);
+    //
+    return decodedData;
+    // } else {
+    //   print(response.statusCode);
+    //   return response.statusCode;
+
+  }
   Future<dynamic> getcardtoken(String storeId,String number,String month,String year,String cvv) async {
     String url = 'https://secure.telr.com/gateway/cardtoken.json';
     var data = {

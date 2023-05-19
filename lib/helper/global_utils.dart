@@ -48,5 +48,6 @@ class GlobalUtils {
   static String emailId='divya.thampi@telr.com';//the minimum required details for a transaction to be processed.
   static String paymenttype='card'; // Let it be static as 'card', used for saved card feature parameter
   static String code='';
-
+  static String savecard='1';
+  static String transref='';
 }
