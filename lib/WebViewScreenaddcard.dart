@@ -135,10 +135,10 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
     builder.processing('xml', 'version="1.0"');
     builder.element('mobile', nest: () {
       builder.element('store', nest: (){
-        builder.text('15996');
+        builder.text(GlobalUtils.storeid);
       });
       builder.element('key', nest: (){
-        builder.text('pQ6nP-7rHt@5WRFv');
+        builder.text(GlobalUtils.authkey);
       });
       builder.element('framed',nest:(){
         builder.text(GlobalUtils.framed);
@@ -203,7 +203,13 @@ class _WebviewScreenaddcardState extends State<WebviewScreenaddcard>{
         // });
 
       });
+//new changes to add savecard option
+      builder.element('card', nest: (){
+        builder.element('savecard', nest: (){
+          builder.text('0');
+        });
 
+      });
       //billing
       builder.element('billing', nest: (){
         // name

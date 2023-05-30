@@ -9,8 +9,8 @@ class GlobalUtils {
    bool test = false;
    static String username='';
    static String currency='';
-  static String storeid='15996';
-  static String authkey='pQ6nP-7rHt@5WRFv';
+  static String storeid='15996';//''; Replace with your store ID before proceeding
+  static String authkey='pQ6nP-7rHt@5WRFv';// Replace with your authkey before proceeding
   static String nullauth='';
   static String nullstore='';
   static String merchantName='';

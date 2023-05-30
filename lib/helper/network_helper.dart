@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:example/helper/global_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:xml/xml.dart';
@@ -13,8 +14,8 @@ class NetWorkHelper {
   Future<dynamic> getsavedcardlist(String storeId, String authKey) async {
     String url = 'https://secure.telr.com/gateway/savedcardslist.json';
     var data = {
-      'storeid': '15996',
-      'authkey': 'pQ6nP-7rHt@5WRFv',
+      'storeid':'15996', //'',
+      'authkey': 'pQ6nP-7rHt@5WRFv',//'',
       'custref': '444',
       'testmode': '1'
     };
@@ -48,8 +49,8 @@ class NetWorkHelper {
     // String url = 'https://secure.telr.com/gateway/delsavedcards.json';
     String url = 'https://secure.telr.com/gateway/delsavedcards.json';
     var data = {
-    'storeid':'15996',
-    'authkey': 'pQ6nP-7rHt@5WRFv',
+    'storeid':GlobalUtils.storeid,
+    'authkey': GlobalUtils.authkey,
     'custref': '444',
     'testmode': '1',
     'tranref':transref
@@ -84,7 +85,7 @@ class NetWorkHelper {
   Future<dynamic> getcardtoken(String storeId,String number,String month,String year,String cvv) async {
     String url = 'https://secure.telr.com/gateway/cardtoken.json';
     var data = {
-      'store': storeId,
+      'store': GlobalUtils.storeid,
       'number': number,
       'expiry_month': month,
       'expiry_year': year,
